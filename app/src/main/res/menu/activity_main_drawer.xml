@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio"
+            android:icon="@android:drawable/ic_menu_mylocation"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/nav_inmuebles"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="Inmuebles" />
+        <item
+            android:id="@+id/nav_inquilinos"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Inquilinos" />
+        <item
+            android:id="@+id/nav_contratos"
+            android:icon="@android:drawable/ic_menu_recent_history"
+            android:title="Contratos" />
+        <item
+            android:id="@+id/nav_cambiar_password"
+            android:icon="@android:drawable/ic_lock_idle_lock"
+            android:title="Cambiar Contraseña" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_lock_power_off"
+            android:title="Cerrar Sesión" />
+    </group>
+</menu>

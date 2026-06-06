@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80CBC4">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvTituloDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Información del inmueble"
+            android:textColor="#C2185B"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/lblCodigo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Código"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/tvTituloDetalle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/lblAmbientes"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/tvCodigo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="503"
+            android:textColor="#C2185B"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/lblCodigo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvAmbientes"/>
+
+        <TextView
+            android:id="@+id/lblAmbientes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ambientes"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toTopOf="@id/lblCodigo"
+            app:layout_constraintStart_toEndOf="@id/lblCodigo"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvAmbientes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textColor="#C2185B"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/lblAmbientes"
+            app:layout_constraintStart_toEndOf="@id/tvCodigo"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/lblDireccion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Dirección"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/tvCodigo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/lblPrecio"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/tvDireccionDetalle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Salta 325"
+            android:textColor="#C2185B"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/lblDireccion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvPrecioDetalle"/>
+
+        <TextView
+            android:id="@+id/lblPrecio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Precio"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toTopOf="@id/lblDireccion"
+            app:layout_constraintStart_toEndOf="@id/lblDireccion"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPrecioDetalle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="$17000.0"
+            android:textColor="#C2185B"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/lblPrecio"
+            app:layout_constraintStart_toEndOf="@id/tvDireccionDetalle"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/lblUso"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Uso"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/tvDireccionDetalle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cbDisponible"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/tvUso"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="particular"
+            android:textColor="#C2185B"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/lblUso"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cbDisponible"/>
+
+        <CheckBox
+            android:id="@+id/cbDisponible"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Disponible"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
+            android:checked="true"
+            android:clickable="false"
+            app:layout_constraintTop_toTopOf="@id/lblUso"
+            app:layout_constraintBottom_toBottomOf="@id/tvUso"
+            app:layout_constraintStart_toEndOf="@id/lblUso"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/lblTipo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Tipo"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/tvUso"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/tvTipo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="casa"
+            android:textColor="#C2185B"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/lblTipo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ivFotoDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_constraintTop_toBottomOf="@id/tvTipo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_inicio">
+
+    <fragment
+        android:id="@+id/nav_inicio"
+        android:name="com.luu.tpinmobiliaria.ui.inicio.InicioFragment"
+        android:label="Ubicación"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.luu.tpinmobiliaria.ui.perfil.PerfilFragment"
+        android:label="Mi Perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/nav_inmuebles"
+        android:name="com.luu.tpinmobiliaria.ui.Inmueble.InmueblesFragment"
+        android:label="Mis Inmuebles"
+        tools:layout="@layout/fragment_inmuebles">
+        <action
+            android:id="@+id/action_nav_inmuebles_to_nav_detalle_inmueble"
+            app:destination="@id/nav_detalle_inmueble" />
+        <action
+            android:id="@+id/action_nav_inmuebles_to_nav_agregar_inmueble"
+            app:destination="@id/nav_agregar_inmueble" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_inquilinos"
+        android:name="com.luu.tpinmobiliaria.ui.inquilinos.InquilinosFragment"
+        android:label="Inquilinos">
+        <action
+            android:id="@+id/action_nav_inquilinos_to_inquilinoDetalleFragment"
+            app:destination="@id/inquilinoDetalleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_contratos"
+        android:name="com.luu.tpinmobiliaria.ui.contratos.ContratosFragment"
+        android:label="Contratos">
+        <action
+            android:id="@+id/action_nav_contratos_to_contratoDetalleFragment"
+            app:destination="@id/contratoDetalleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_cambiar_password"
+        android:name="com.luu.tpinmobiliaria.ui.cambiar_password.CambiarPasswordFragment"
+        android:label="Cambiar Contraseña"
+        tools:layout="@layout/fragment_cambiar_password" />
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.luu.tpinmobiliaria.ui.logout.LogoutFragment"
+        android:label="Salir" />
+
+    <fragment
+        android:id="@+id/nav_detalle_inmueble"
+        android:name="com.luu.tpinmobiliaria.ui.Inmueble.DetalleInmuebleFragment"
+        android:label="Detalle de Inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble" />
+
+    <fragment
+        android:id="@+id/nav_agregar_inmueble"
+        android:name="com.luu.tpinmobiliaria.ui.Inmueble.AgregarInmuebleFragment"
+        android:label="Agregar Inmueble"
+        tools:layout="@layout/fragment_agregar_inmueble" />
+
+    <fragment
+        android:id="@+id/contratoDetalleFragment"
+        android:name="com.luu.tpinmobiliaria.ui.contratos.ContratoDetalleFragment"
+        android:label="Detalle Contrato">
+        <action
+            android:id="@+id/action_contratoDetalleFragment_to_pagosFragment"
+            app:destination="@id/pagosFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inquilinoDetalleFragment"
+        android:name="com.luu.tpinmobiliaria.ui.inquilinos.InquilinoDetalleFragment"
+        android:label="Detalle Inquilino"
+        tools:layout="@layout/fragment_detalle_inquilino" />
+
+    <fragment
+        android:id="@+id/pagosFragment"
+        android:name="com.luu.tpinmobiliaria.ui.Pagos.PagosFragment"
+        android:label="Pagos del Contrato"
+        tools:layout="@layout/fragment_pagos" />
+
+</navigation>
