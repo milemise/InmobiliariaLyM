@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import com.luu.tpinmobiliaria.R;
+import com.luu.tpinmobiliaria.models.Inmueble;
 
 public class ContratoDetalleFragment extends Fragment {
 
@@ -37,10 +38,16 @@ public class ContratoDetalleFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(ContratoDetalleViewModel.class);
 
-        int idInmueble = getArguments().getInt("idInmueble");
+        Inmueble inmueble =
+                (Inmueble) getArguments().getSerializable("inmueble");
 
         viewModel.getMContrato().observe(getViewLifecycleOwner(), contrato -> {
-            tvInquilino.setText(contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido());
+
+            tvInquilino.setText(
+                    contrato.getInquilino().getNombre()
+                            + " "
+                            + contrato.getInquilino().getApellido());
+
             tvFechaInicio.setText(contrato.getFechaInicio());
             tvFechaFin.setText(contrato.getFechaFinalizacion());
             tvMonto.setText("$" + String.format("%.0f", contrato.getMontoAlquiler()));
@@ -48,10 +55,14 @@ public class ContratoDetalleFragment extends Fragment {
             btnVerPagos.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putInt("idContrato", contrato.getIdContrato());
-                Navigation.findNavController(view).navigate(R.id.pagosFragment, bundle);
+
+                Navigation.findNavController(view)
+                        .navigate(R.id.pagosFragment, bundle);
             });
         });
 
-        viewModel.cargarContrato(idInmueble);
+        if(inmueble != null){
+            viewModel.cargarContrato(inmueble.getId());
+        }
     }
 }

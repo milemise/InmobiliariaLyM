@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.luu.tpinmobiliaria.R;
+import com.luu.tpinmobiliaria.models.Inmueble;
 
 public class InquilinoDetalleFragment extends Fragment {
 
@@ -34,16 +35,28 @@ public class InquilinoDetalleFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(InquilinoDetalleViewModel.class);
 
-        int idInmueble = getArguments().getInt("idInmueble");
+        Inmueble inmueble =
+                (Inmueble) getArguments().getSerializable("inmueble");
 
         viewModel.getMContrato().observe(getViewLifecycleOwner(), contrato -> {
+
             if (contrato.getInquilino() != null) {
-                tvNombre.setText(contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido());
-                tvDni.setText(String.valueOf(contrato.getInquilino().getDni()));
-                tvTelefono.setText(contrato.getInquilino().getTelefono());
+
+                tvNombre.setText(
+                        contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido());
+
+                tvDni.setText(
+                        String.valueOf(contrato.getInquilino().getDni()));
+
+                tvTelefono.setText(
+                        contrato.getInquilino().getTelefono());
             }
         });
 
-        viewModel.cargarInquilino(idInmueble);
+        if(inmueble != null){
+            viewModel.cargarInquilino(inmueble.getId());
+        }
     }
+
+
 }

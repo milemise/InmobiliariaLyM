@@ -23,6 +23,7 @@ public class InquilinoDetalleViewModel extends AndroidViewModel {
         this.context = application.getApplicationContext();
     }
 
+
     public LiveData<Contrato> getMContrato() {
         if (mContrato == null) {
             mContrato = new MutableLiveData<>();
