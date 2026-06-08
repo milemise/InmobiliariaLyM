@@ -86,12 +86,6 @@ public class ApiClient {
                 @Body Inmueble inmueble
         );
 
-        @PUT("api/Inmuebles/cambiarDisponibilidad")
-        Call<Inmueble> cambiarDisponibilidad(
-                @Header("Authorization") String token,
-                @Body Inmueble inmueble
-        );
-
         @Multipart
         @POST("api/Inmuebles/cargar")
         Call<Inmueble> cargarInmueble(

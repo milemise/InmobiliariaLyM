@@ -38,12 +38,13 @@ public class DetalleInmuebleFragment extends Fragment {
 
         vm.getMDisponible().observe(getViewLifecycleOwner(), ed -> {
             binding.cbDisponible.setOnCheckedChangeListener(null);
+
             binding.cbDisponible.setChecked(ed.isEstadoBooleano());
             binding.cbDisponible.setText(ed.getTexto());
-        });
 
-        binding.cbDisponible.setOnClickListener(v -> {
-            vm.cambiarDisponibilidad();
+            binding.cbDisponible.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                vm.cambiarDisponibilidad(isChecked);
+            });
         });
 
         if (getArguments() != null) {

@@ -1,16 +1,21 @@
 package com.luu.tpinmobiliaria.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Inmueble implements Serializable {
 
+    @SerializedName("idInmueble")
     private int id;
     private String direccion;
     private int ambientes;
+    @SerializedName("valor")
     private double precio;
     private String uso;
     private String tipo;
     private boolean disponible;
+    @SerializedName("imagen")
     private String imagenUrl;
 
     public Inmueble() {

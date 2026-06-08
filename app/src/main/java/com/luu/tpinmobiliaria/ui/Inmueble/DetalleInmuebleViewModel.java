@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.luu.tpinmobiliaria.models.EstadoDisponibilidad;
 import com.luu.tpinmobiliaria.models.Inmueble;
 import com.luu.tpinmobiliaria.request.ApiClient;
 import retrofit2.Call;
@@ -75,28 +77,53 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
         mDisponible.setValue(ed);
     }
 
-    public void cambiarDisponibilidad() {
+    public void cambiarDisponibilidad(boolean disponible) {
+        Toast.makeText(
+                getApplication(),
+                "Disponible: " + disponible,
+                Toast.LENGTH_SHORT
+        ).show();
+
         Inmueble i = mInmueble.getValue();
+
         if (i == null) return;
 
-        i.setDisponible(!i.getDisponible());
+        i.setDisponible(disponible);
 
         String token = "Bearer " + ApiClient.obtenerToken(getApplication());
-        ApiClient.getServicio().cambiarDisponibilidad(token, i).enqueue(new Callback<Inmueble>() {
-            @Override
-            public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    mInmueble.setValue(response.body());
-                    setDisponible(response.body().getDisponible());
-                } else {
-                    Toast.makeText(getApplication(), "Error al cambiar estado", Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Inmueble> call, Throwable t) {
-                Toast.makeText(getApplication(), "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        ApiClient.getServicio()
+                .actualizarInmueble(token, i)
+                .enqueue(new Callback<Inmueble>() {
+
+                    @Override
+                    public void onResponse(Call<Inmueble> call,
+                                           Response<Inmueble> response) {
+
+                        if (response.isSuccessful() && response.body() != null) {
+
+                            mInmueble.setValue(response.body());
+                            setDisponible(response.body().getDisponible());
+
+                        } else {
+
+                            Toast.makeText(
+                                    getApplication(),
+                                    "Código: " + response.code(),
+                                    Toast.LENGTH_LONG
+                            ).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Inmueble> call, Throwable t) {
+                        Toast.makeText(
+                                getApplication(),
+                                "Error de red: " + t.getMessage(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                });
     }
 }

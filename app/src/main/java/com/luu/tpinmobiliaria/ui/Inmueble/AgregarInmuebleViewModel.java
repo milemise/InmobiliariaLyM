@@ -14,6 +14,10 @@ import com.google.gson.Gson;
 import com.luu.tpinmobiliaria.models.Inmueble;
 import com.luu.tpinmobiliaria.request.ApiClient;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -26,6 +30,37 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
     private Context context;
     private MutableLiveData<Uri> mImagenUri;
     private MutableLiveData<Boolean> mGuardadoExitoso;
+
+    private File getFileFromUri(Uri uri) {
+        try {
+            InputStream inputStream =
+                    context.getContentResolver().openInputStream(uri);
+
+            File tempFile = new File(
+                    context.getCacheDir(),
+                    "imagen_temp.jpg"
+            );
+
+            OutputStream outputStream =
+                    new FileOutputStream(tempFile);
+
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            outputStream.close();
+            inputStream.close();
+
+            return tempFile;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public AgregarInmuebleViewModel(@NonNull Application application) {
         super(application);
@@ -79,10 +114,18 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
 
         MultipartBody.Part imagenPart = null;
         if (mImagenUri.getValue() != null) {
-            File file = new File(mImagenUri.getValue().getPath());
-            RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), file);
-            imagenPart = MultipartBody.Part.createFormData("imagen", file.getName(), fileBody);
-        }
+            File file = getFileFromUri(mImagenUri.getValue());
+
+            if (file != null) {
+                RequestBody fileBody =
+                        RequestBody.create(MediaType.parse("image/*"), file);
+
+                imagenPart = MultipartBody.Part.createFormData(
+                        "imagen",
+                        file.getName(),
+                        fileBody
+                );
+            }
 
         String token = ApiClient.obtenerToken(context);
 
@@ -100,8 +143,15 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
 
                     @Override
                     public void onFailure(Call<Inmueble> call, Throwable t) {
-                        Toast.makeText(context, "Error de red", Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+
+                        Toast.makeText(
+                                context,
+                                t.toString(),
+                                Toast.LENGTH_LONG
+                        ).show();
                     }
                 });
     }
-}
+
+}}

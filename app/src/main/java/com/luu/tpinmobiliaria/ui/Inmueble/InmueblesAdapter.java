@@ -16,18 +16,22 @@ import com.luu.tpinmobiliaria.R;
 import com.luu.tpinmobiliaria.models.Inmueble;
 import com.luu.tpinmobiliaria.request.ApiClient;
 import java.util.List;
+import android.widget.Switch;
 
 public class InmueblesAdapter extends RecyclerView.Adapter<InmueblesAdapter.ViewHolder> {
 
     private List<Inmueble> lista;
     private Context context;
     private LayoutInflater inflater;
+    private SwitchCompat switchCompat;
+
 
     public InmueblesAdapter(List<Inmueble> lista, Context context, LayoutInflater inflater) {
         this.lista = lista;
         this.context = context;
         this.inflater = inflater;
     }
+
 
     @NonNull
     @Override

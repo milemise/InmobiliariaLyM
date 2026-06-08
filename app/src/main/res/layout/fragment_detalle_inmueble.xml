@@ -138,8 +138,6 @@
             android:text="Disponible"
             android:textColor="#FFFFFF"
             android:buttonTint="#FFFFFF"
-            android:checked="true"
-            android:clickable="false"
             app:layout_constraintTop_toTopOf="@id/lblUso"
             app:layout_constraintBottom_toBottomOf="@id/tvUso"
             app:layout_constraintStart_toEndOf="@id/lblUso"

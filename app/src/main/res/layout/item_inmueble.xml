@@ -48,7 +48,7 @@
                 android:textSize="14sp"
                 android:layout_marginTop="2dp" />
 
-            <Switch
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/swDisponible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

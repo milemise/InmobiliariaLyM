@@ -1,4 +1,4 @@
-package com.luu.tpinmobiliaria.ui;
+package com.luu.tpinmobiliaria;
 
 import android.app.Application;
 import android.content.Context;
@@ -23,7 +23,10 @@ public class LoginActivityViewModel extends AndroidViewModel {
 
     public LoginActivityViewModel(@NonNull Application application) {
         super(application);
-        this.context = application.getApplicationContext();
+        context = application.getApplicationContext();
+
+        mLoginExitoso = new MutableLiveData<>();
+        mIntentLlamada = new MutableLiveData<>();
     }
 
     public LiveData<Boolean> getMLoginExitoso() {
@@ -89,4 +92,6 @@ public class LoginActivityViewModel extends AndroidViewModel {
             mIntentLlamada.setValue(intent);
         }
     }
+
+
 }
