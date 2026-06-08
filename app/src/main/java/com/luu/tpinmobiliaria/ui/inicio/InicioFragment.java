@@ -6,69 +6,48 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.luu.tpinmobiliaria.R;
 import com.luu.tpinmobiliaria.databinding.FragmentInicioBinding;
 
-public class InicioFragment extends Fragment implements OnMapReadyCallback {
+public class InicioFragment extends Fragment {
 
     private FragmentInicioBinding binding;
-    private GoogleMap mMap;
     private InicioViewModel viewModel;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentInicioBinding.inflate(inflater, container, false);
-        viewModel = new ViewModelProvider(this).get(InicioViewModel.class);
 
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getChildFragmentManager()
-                        .findFragmentById(R.id.map);
+        viewModel = new ViewModelProvider(this)
+                .get(InicioViewModel.class);
 
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
+        viewModel.getMutableMapaActual().observe(
+                getViewLifecycleOwner(),
+                new Observer<InicioViewModel.MapaActual>() {
+                    @Override
+                    public void onChanged(InicioViewModel.MapaActual mapaActual) {
+
+                        SupportMapFragment mapFragment =
+                                (SupportMapFragment) getChildFragmentManager()
+                                        .findFragmentById(R.id.map);
+
+                        if (mapFragment != null) {
+                            mapFragment.getMapAsync(mapaActual);
+                        }
+                    }
+                });
+
+        viewModel.cargarMapa();
 
         return binding.getRoot();
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        viewModel.getMUbicacion().observe(getViewLifecycleOwner(), latLng -> {
-            mMap.clear();
-            mMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title("Universidad de La Punta"));
-
-            mMap.setBuildingsEnabled(true);
-            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(latLng)
-                    .zoom(18)
-                    .tilt(70)
-                    .bearing(45)
-                    .build();
-
-            mMap.animateCamera(
-                    CameraUpdateFactory.newCameraPosition(cameraPosition)
-            );
-        });
-
-        viewModel.cargarUbicacion();
     }
 
     @Override
@@ -77,3 +56,6 @@ public class InicioFragment extends Fragment implements OnMapReadyCallback {
         binding = null;
     }
 }
+
+//Elimine implements y OnMapReady() y onMapReadyCallback
+//Solamente objerva el liveData y ejecuta
