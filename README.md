@@ -87,7 +87,6 @@ Aplicación móvil Android desarrollada en Java para la gestión integral de inm
 * Cambio de disponibilidad
 * Cambio de contraseña
 * Inquilinos
-* Interfaz de usuario y validaciones
 * Llamada en el login
 
 ## Funcionalidades Finales
