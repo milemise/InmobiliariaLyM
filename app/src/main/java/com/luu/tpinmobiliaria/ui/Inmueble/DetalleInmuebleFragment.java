@@ -36,6 +36,8 @@ public class DetalleInmuebleFragment extends Fragment {
             }
         });
 
+        //CORRECCIONES DE DISPONIBILIDAD
+
         vm.getMDisponible().observe(getViewLifecycleOwner(), estado -> {
 
             binding.cbDisponible.setOnCheckedChangeListener(null);

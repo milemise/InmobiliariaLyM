@@ -68,6 +68,7 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
         }
     }
 
+    //CORRECCIONES DISPONIBILIDAD
     public void cambiarDisponibilidad(boolean disponible) {
 
         Toast.makeText(
