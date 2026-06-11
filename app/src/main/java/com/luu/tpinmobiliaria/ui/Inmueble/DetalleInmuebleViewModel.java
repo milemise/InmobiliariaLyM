@@ -3,14 +3,15 @@ package com.luu.tpinmobiliaria.ui.Inmueble;
 import android.app.Application;
 import android.os.Bundle;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.luu.tpinmobiliaria.models.EstadoDisponibilidad;
 import com.luu.tpinmobiliaria.models.Inmueble;
 import com.luu.tpinmobiliaria.request.ApiClient;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,7 +20,7 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
 
     private MutableLiveData<Inmueble> mInmueble;
     private MutableLiveData<String> mUrlImagen;
-    private MutableLiveData<EstadoDisponibilidad> mDisponible;
+    private MutableLiveData<String> mDisponible;
 
     public DetalleInmuebleViewModel(@NonNull Application application) {
         super(application);
@@ -39,7 +40,7 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
         return mUrlImagen;
     }
 
-    public LiveData<EstadoDisponibilidad> getMDisponible() {
+    public LiveData<String> getMDisponible() {
         if (mDisponible == null) {
             mDisponible = new MutableLiveData<>();
         }
@@ -49,6 +50,7 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
     public void recuperarDatos(Bundle bundle) {
         if (bundle != null) {
             Inmueble inmueble = (Inmueble) bundle.getSerializable("inmueble");
+
             if (inmueble != null) {
                 mInmueble.setValue(inmueble);
                 setDisponible(inmueble.getDisponible());
@@ -58,26 +60,16 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
     }
 
     public void setDisponible(boolean disponible) {
-        EstadoDisponibilidad ed;
+
         if (disponible) {
-            ed = new EstadoDisponibilidad(
-                    "Disponible",
-                    android.R.drawable.checkbox_on_background,
-                    android.R.color.holo_green_light,
-                    true
-            );
+            mDisponible.setValue("Disponible");
         } else {
-            ed = new EstadoDisponibilidad(
-                    "No Disponible",
-                    android.R.drawable.checkbox_off_background,
-                    android.R.color.holo_red_light,
-                    false
-            );
+            mDisponible.setValue("No Disponible");
         }
-        mDisponible.setValue(ed);
     }
 
     public void cambiarDisponibilidad(boolean disponible) {
+
         Toast.makeText(
                 getApplication(),
                 "Disponible: " + disponible,
@@ -118,6 +110,7 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
 
                     @Override
                     public void onFailure(Call<Inmueble> call, Throwable t) {
+
                         Toast.makeText(
                                 getApplication(),
                                 "Error de red: " + t.getMessage(),

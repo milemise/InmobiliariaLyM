@@ -36,11 +36,15 @@ public class DetalleInmuebleFragment extends Fragment {
             }
         });
 
-        vm.getMDisponible().observe(getViewLifecycleOwner(), ed -> {
+        vm.getMDisponible().observe(getViewLifecycleOwner(), estado -> {
+
             binding.cbDisponible.setOnCheckedChangeListener(null);
 
-            binding.cbDisponible.setChecked(ed.isEstadoBooleano());
-            binding.cbDisponible.setText(ed.getTexto());
+            binding.cbDisponible.setText(estado);
+
+            binding.cbDisponible.setChecked(
+                    estado.equals("Disponible")
+            );
 
             binding.cbDisponible.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 vm.cambiarDisponibilidad(isChecked);
