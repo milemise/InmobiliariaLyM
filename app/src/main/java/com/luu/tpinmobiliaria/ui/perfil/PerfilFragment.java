@@ -32,7 +32,6 @@ public class PerfilFragment extends Fragment {
         viewModel.getEditable().observe(getViewLifecycleOwner(), aBoolean -> {
             binding.etNombre.setEnabled(aBoolean);
             binding.etApellido.setEnabled(aBoolean);
-            binding.etEmail.setEnabled(aBoolean);
             binding.etTelefono.setEnabled(aBoolean);
 
             if (aBoolean) {
